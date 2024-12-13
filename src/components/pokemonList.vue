@@ -45,14 +45,17 @@ const updateMoreInfo = (index) => {
 
 <template>
     <div class="listContainer">
-        <div v-if="isLoading" class="loading">LOADING</div>
-        <div v-else class="grid">
-            <div v-for="item in data" :key="item.pokedex_id" class="grid-item">
-                <div v-if="!item.moreInfo">
-                    <TaskItem @remove:pokemon="del" @update:moreInfo="updateMoreInfo" :pokemon="item" />
-                </div>
-                <div v-else>
-                    <PokemonCard @update:moreInfo="updateMoreInfo" :pokemon="item" />
+        <div v-if="pokemonList.length == 0">Pas de pokemon dans le pokedex</div>
+        <div v-else>
+            <div v-if="isLoading" class="loading">LOADING</div>
+            <div v-else class="grid">
+                <div v-for="item in data" :key="item.pokedex_id" class="grid-item">
+                    <div v-if="!item.moreInfo">
+                        <TaskItem @remove:pokemon="del" @update:moreInfo="updateMoreInfo" :pokemon="item" />
+                    </div>
+                    <div v-else>
+                        <PokemonCard @update:moreInfo="updateMoreInfo" :pokemon="item" />
+                    </div>
                 </div>
             </div>
         </div>
