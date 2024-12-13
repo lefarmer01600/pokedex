@@ -20,10 +20,15 @@ const getData = async () => {
     isLoading.value = true;
 
     for (const element of props.pokemonList) {
-        console.log(element.title);
         const fetched = await fetch(`https://tyradex.vercel.app/api/v1/pokemon/${element.title}`);
         const fetchedData = await fetched.json();
-        data.value.push({ index: props.pokemonList.indexOf(element), moreInfo: false, pokemon: fetchedData });
+        if (fetchedData.status) {
+            emit("remove:pokemon", props.pokemonList.indexOf(element));
+            alert("Pokemon not found");
+        }else{
+            data.value.push({ index: props.pokemonList.indexOf(element), moreInfo: false, pokemon: fetchedData });
+        }
+        
     }
     isLoading.value = false;
 };
@@ -45,7 +50,8 @@ const updateMoreInfo = (index) => {
 
 <template>
     <div class="listContainer">
-        <div v-if="pokemonList.length == 0">Pas de pokemon dans le pokedex</div>
+        Nombre de pokemon : {{ data.length }}
+        <div v-if="data.length == 0">Pas de pokemon dans le pokedex</div>
         <div v-else>
             <div v-if="isLoading" class="loading">LOADING</div>
             <div v-else class="grid">

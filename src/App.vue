@@ -10,7 +10,6 @@ const pokemonList = ref([
 
 const add = (task) => {
   pokemonList.value.push(task);
-  console.log(pokemonList.value);
 };
 
 const del = (index) => {

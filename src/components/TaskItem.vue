@@ -14,7 +14,6 @@ const deletePokemon = () => {
 
 const handleMoreInfo = () => {
   emit("update:moreInfo", props.pokemon.index);
-  console.log(props.pokemon.moreInfo);
 };
 
 
