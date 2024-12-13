@@ -6,6 +6,10 @@ import TaskForm from "@/components/TaskForm.vue";
 
 const pokemonList = ref([
     {title : "1"},
+    {title : "pikachu"},
+    {title : "charmander"},
+    {title : "bulbasaur"},
+    {title : "squirtle"},
   ]);
 
 const add = (task) => {
